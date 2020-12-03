@@ -68,10 +68,43 @@
         .slide {
             height: 100%;
         }
+        
+        #products {
+            margin-top: 8px;
+        }
+        
+        #cat_row {
+            padding-left: 8px;
+        }
+        
+        .product {
+            height: 100;
+        }
+        
+        #items_contaner {
+            height: 160px;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+            margin-bottom: 10px;
+        }
+        
+        #items_contaner::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .item_card {
+            height: 100%;
+            width: 150px;
+            display: inline-block;
+            margin-right: 1px;
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body>
+<body class="mat-typography">
     <app-root></app-root>
 </body>
 
