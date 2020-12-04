@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "codetribe-a61b7": {
+      "hosting": {
+        "app": [
+          "codetribe-a61b7"
+        ]
+      }
+    }
+  }
+}

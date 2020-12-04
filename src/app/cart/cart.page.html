@@ -1,9 +1,65 @@
-<ion-header>
+<ion-header [translucent]="true">
     <ion-toolbar>
-        <ion-title>Basket</ion-title>
+        <ion-title>My Basket</ion-title>
+
+        <ion-buttons slot="end">
+        	<ion-button color="dark" fill="solid" shape="round">Checkout</ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+	<ion-grid>
+		<ion-row class="item_cart">
+			<ion-col size="4">
+				<img class="img_cart" src="../assets/images/products/burger.jpeg">
+			</ion-col>
 
+			<ion-col size="8" style="padding: 0px">
+				<ion-grid style="margin: 0px; padding: 0px" >
+					<ion-row >
+						<ion-col style="padding: 0px; margin-top: 1px;margin-left: 4px" size="12">
+							<ion-label><b>Burger</b></ion-label>
+						</ion-col>
+					</ion-row>
+
+					<ion-row>
+						<ion-col size="12">
+							<ion-label><b>R100</b></ion-label>
+						</ion-col>
+					</ion-row>
+
+					<ion-row>
+						<ion-col size="2">
+							<span><ion-icon class="cart_icon" name="bag-remove"></ion-icon></span>
+						</ion-col>
+
+						<ion-col size="2">
+							<span><ion-badge >2</ion-badge></span>
+						</ion-col>
+
+						<ion-col size="2">
+							<span><ion-icon class="cart_icon" name="bag-add"></ion-icon></span>
+						</ion-col>
+
+						<ion-col size="4" style="text-align: right;" >
+							<ion-icon class="cart_icon" name="trash"></ion-icon>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-col>
+		</ion-row>
+
+	</ion-grid>
 </ion-content>
+
+<ion-footer>
+	<ion-toolbar>
+		<ion-label class="ion-margin" slot="start">Total items</ion-label>
+		<ion-label color="dark"slot="start"><b>5</b></ion-label>
+
+
+		<ion-label slot="end">Total price</ion-label>
+		<ion-label color="dard" class="ion-margin" slot="end"><b>R500</b></ion-label>
+	</ion-toolbar>
+</ion-footer>
