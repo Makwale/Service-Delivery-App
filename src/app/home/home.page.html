@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-searchbar placeholder="What do you like to search?"></ion-searchbar>
+    <ion-searchbar id="searchbar" placeholder="What do you like to search?"></ion-searchbar>
 
     <ion-list>
         <ion-item-divider id="category">
@@ -87,85 +87,293 @@
         <div id="items_contaner">
             <ion-card class="item_card">
                 <img src='../assets/images/products/pizza.jpeg'>
-                <ion-card-header style="padding: 0px;">
-                    <ion-card-subtitle>Chicken and Mashroomdffhfdhghd</ion-card-subtitle>
-                </ion-card-header>
-                <ion-label color="dark">
-                    <b>R100</b>
-                </ion-label>
-                <ion-icon style="margin-left: 65px; margin-top: 3px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
-                <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-card-header style="padding: 0px;">
+                                <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
+                            </ion-card-header>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="8">
+                            <ion-label color="dark">
+                            <b>R100</b></ion-label>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style=" margin-top: 1px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
 
             </ion-card>
 
             <ion-card class="item_card">
                 <img src='../assets/images/products/pizza.jpeg'>
-                <ion-card-header style="padding: 0px;">
-                    <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
-                </ion-card-header>
-                <ion-label color="dark">
-                    <b>R100</b>
-                </ion-label>
+                
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-card-header style="padding: 0px;">
+                                <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
+                            </ion-card-header>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="8">
+                            <ion-label color="dark">
+                            <b>R100</b></ion-label>
+                        </ion-col>
 
-                <ion-icon style="margin-left: 65px; margin-top: 3px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
-                <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
-            </ion-card>
+                        <ion-col size="2">
+                             <ion-icon style=" margin-top: 1px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
+                        </ion-col>
 
-            <ion-card class="item_card">
-                <img src='../assets/images/products/pizza.jpeg'>
-                <ion-card-header style="padding: 0px;">
-                    <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
-                </ion-card-header>
-                <ion-label color="dark">
-                    <b>R100</b>
-                </ion-label>
-
-                <ion-icon style="margin-left: 65px; margin-top: 3px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
-                <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
-
-            </ion-card>
-
-            <ion-card class="item_card">
-                <img src='../assets/images/products/pizza.jpeg'>
-                <ion-card-header style="padding: 0px;">
-                    <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
-                </ion-card-header>
-                <ion-label color="dark">
-                    <b>R100</b>
-                </ion-label>
-
-                <ion-icon style="margin-left: 65px; margin-top: 3px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
-                <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
-            </ion-card>
-
-            <ion-card class="item_card">
-                <img src='../assets/images/products/pizza.jpeg'>
-                <ion-card-header style="padding: 0px;">
-                    <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
-                </ion-card-header>
-                <ion-label color="dark">
-                    <b>R100</b>
-                </ion-label>
-
-                <ion-icon style="margin-left: 65px; margin-top: 3px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
-                <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        <ion-col size="2">
+                             <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
 
             </ion-card>
 
             <ion-card class="item_card">
                 <img src='../assets/images/products/pizza.jpeg'>
-                <ion-card-header style="padding: 0px;">
-                    <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
-                </ion-card-header>
-                <ion-label color="dark">
-                    <b>R100</b>
-                </ion-label>
+                
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-card-header style="padding: 0px;">
+                                <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
+                            </ion-card-header>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="8">
+                            <ion-label color="dark">
+                            <b>R100</b></ion-label>
+                        </ion-col>
 
-                <ion-icon style="margin-left: 65px; margin-top: 3px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
-                <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        <ion-col size="2">
+                             <ion-icon style=" margin-top: 1px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
             </ion-card>
 
+            <ion-card class="item_card">
+                <img src='../assets/images/products/pizza.jpeg'>
+                
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-card-header style="padding: 0px;">
+                                <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
+                            </ion-card-header>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="8">
+                            <ion-label color="dark">
+                            <b>R100</b></ion-label>
+                        </ion-col>
 
+                        <ion-col size="2">
+                             <ion-icon style=" margin-top: 1px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-card>
+
+            <ion-card class="item_card">
+                <img src='../assets/images/products/pizza.jpeg'>
+                
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-card-header style="padding: 0px;">
+                                <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
+                            </ion-card-header>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="8">
+                            <ion-label color="dark">
+                            <b>R100</b></ion-label>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style=" margin-top: 1px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-card>
+
+            <ion-card class="item_card">
+                <img src='../assets/images/products/pizza.jpeg'>
+                
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-card-header style="padding: 0px;">
+                                <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
+                            </ion-card-header>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="8">
+                            <ion-label color="dark">
+                            <b>R100</b></ion-label>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style=" margin-top: 1px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-card>
+
+            <ion-card class="item_card">
+                <img src='../assets/images/products/pizza.jpeg'>
+                
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-card-header style="padding: 0px;">
+                                <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
+                            </ion-card-header>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="8">
+                            <ion-label color="dark">
+                            <b>R100</b></ion-label>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style=" margin-top: 1px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-card>
+
+            <ion-card class="item_card">
+                <img src='../assets/images/products/pizza.jpeg'>
+                
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-card-header style="padding: 0px;">
+                                <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
+                            </ion-card-header>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="8">
+                            <ion-label color="dark">
+                            <b>R100</b></ion-label>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style=" margin-top: 1px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-card>
+
+            <ion-card class="item_card">
+                <img src='../assets/images/products/pizza.jpeg'>
+                
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-card-header style="padding: 0px;">
+                                <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
+                            </ion-card-header>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="8">
+                            <ion-label color="dark">
+                            <b>R100</b></ion-label>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style=" margin-top: 1px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-card>
+
+            <ion-card class="item_card">
+                <img src='../assets/images/products/pizza.jpeg'>
+                
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-card-header style="padding: 0px;">
+                                <ion-card-subtitle>Chicken and Mashroom</ion-card-subtitle>
+                            </ion-card-header>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="8">
+                            <ion-label color="dark">
+                            <b>R100</b></ion-label>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style=" margin-top: 1px; margin-right: 5px; color:black; font-size: large;" name="heart"></ion-icon>
+                        </ion-col>
+
+                        <ion-col size="2">
+                             <ion-icon style="color: black; font-size: large;" name="bag-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-card>
 
         </div>
 
