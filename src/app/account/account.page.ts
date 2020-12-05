@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
+	isRegistered = true;
+	name = "Login";
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  register(){
+  	this.name = "Register";
+  	this.isRegistered = false;
   }
 
 }

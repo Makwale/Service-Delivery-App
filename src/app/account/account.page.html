@@ -1,9 +1,59 @@
-<ion-header>
+<ion-header [translucent]="true">
     <ion-toolbar>
-        <ion-title>Account</ion-title>
+        <ion-title>{{name}}</ion-title>
+
+        <ion-buttons slot="end">
+        	<ion-button *ngIf="isRegistered" shape="round" fill="solid" size="small" color="dark" (click)="register()">Register</ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+	<div id="acc_container" *ngIf="isRegistered">
+		<ion-item>
+			<ion-label position="stacked">Email</ion-label>
+			<ion-input type="email"><ion-icon slot="end" name="mail"></ion-icon></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label position="stacked">Password</ion-label>
+			<ion-input type="password"><ion-icon slot="end" name="lock-closed"></ion-icon></ion-input>
+		</ion-item>
+
+		<ion-button shape="round" color="dark" expand="block" fill="solid">Login</ion-button>
+	</div>
+
+
+
+	<div id="reg_container" *ngIf="!isRegistered">
+		<ion-item>
+			<ion-label position="stacked">First Name</ion-label>
+			<ion-input type="text"><ion-icon slot="start" name="person"></ion-icon></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label position="stacked">Last Name</ion-label>
+			<ion-input type="text"><ion-icon slot="start" name="person"></ion-icon></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label position="stacked">Phone Number</ion-label>
+			<ion-input type="tel"><ion-icon slot="start" name="call"></ion-icon></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label position="stacked">Email</ion-label>
+			<ion-input type="email"><ion-icon slot="start" name="mail"></ion-icon></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label position="stacked">Password</ion-label>
+
+			<ion-input type="password"><ion-icon slot="start" name="lock-closed"></ion-icon></ion-input>
+		</ion-item>
+
+		<ion-button shape="round" color="dark" expand="block" fill="solid">Register</ion-button>
+	</div>
 
 </ion-content>

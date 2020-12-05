@@ -7,10 +7,10 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" #main>
     <ion-searchbar id="searchbar" placeholder="What do you like to search?"></ion-searchbar>
 
-    <ion-list>
+    <ion-list style="margin-top: 40px">
         <ion-item-divider id="category">
             <ion-label slot="start">
                 Category
@@ -60,7 +60,7 @@
                 <div id="slide_one_div">
                     <h4>Get 20% off <br><span>on your first order</span>
                     </h4>
-                    <ion-button color="light" size="small" shape="round">EXPLORE MORE+</ion-button>
+                    <ion-button color="light" size="small" shape="round" (click)="main.scrollToBottom(1500)">EXPLORE MORE+</ion-button>
                 </div>
 
             </ion-slide>
