@@ -11,6 +11,7 @@ export class MapPage implements OnInit {
 	map;
 	lat:number;
 	lon:number;
+	direction;
   constructor() { }
 
   ngOnInit() {
@@ -34,31 +35,36 @@ export class MapPage implements OnInit {
    	 	});
 
    	 	this.map.addControl(new mapboxgl.NavigationControl());
+   	 	
+   	 	this.direction =  new MapboxDirections({
+		      accessToken: mapboxgl.accessToken,
+		      profile: "mapbox/driving",
+		      alternatives: true,
+		      congestion: true,
+		      unit: "metric",
+		      controls: {instructions: false}
+		  })
 
-		this.map.addControl(
-		    new MapboxDirections({
-		      accessToken: mapboxgl.accessToken
-		    }),
-		      'bottom-left'
-		 );
+		this.map.addControl(this.direction,'bottom-left');
 
 		this.map.addControl(new mapboxgl.FullscreenControl());
 
 		this.map.addControl(new mapboxgl.GeolocateControl({
 			positionOptions: {
-			enableHighAccuracy: true
+				enableHighAccuracy: true
 			},
 			trackUserLocation: true
 		}));
 
  	})
 
+  }
 
+  trackOrder(){
+  	this.direction.setOrigin([28.168399, -25.70587]);
+  	this.direction.setDestination([28.14796,-25.67029]);
 
-
-
-   
-
+  	console.log(this.direction.getWaypoints());
   }
 
 

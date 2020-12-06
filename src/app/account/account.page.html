@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
+    <ion-toolbar color="background">
         <ion-title>{{name}}</ion-title>
 
         <ion-buttons slot="end">
-        	<ion-button *ngIf="isRegistered" shape="round" fill="solid" size="small" color="dark" (click)="register()">Register</ion-button>
+        	<ion-button *ngIf="isRegistered" shape="round" fill="solid" size="small" color="dark" style=" color: #d8e614" (click)="register()">Register</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>

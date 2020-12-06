@@ -1,5 +1,5 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
+<ion-header [translucent]="true" >
+    <ion-toolbar color="background">
         <ion-icon id="brand" name="locate-outline" slot="start"></ion-icon>
         <h4>
             <span style="font-size: 70%;">Delivery to</span><br><span style="font-size: 90%;">Pretoria</span></h4>
@@ -7,18 +7,18 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" #main>
+<ion-content [fullscreen]="true" color="background" #main class="parent">
     <ion-searchbar id="searchbar" placeholder="What do you like to search?"></ion-searchbar>
 
-    <ion-list style="margin-top: 40px">
-        <ion-item-divider id="category">
+    <ion-list style="margin-top: 40px" color="background">
+        <ion-item-divider id="category" color="background">
             <ion-label slot="start">
                 Category
             </ion-label>
 
         </ion-item-divider>
 
-        <ion-grid>
+        <ion-grid color="background">
             <ion-row id="cat_row">
                 <ion-col size="3">
 
@@ -60,7 +60,7 @@
                 <div id="slide_one_div">
                     <h4>Get 20% off <br><span>on your first order</span>
                     </h4>
-                    <ion-button color="light" size="small" shape="round" (click)="main.scrollToBottom(1500)">EXPLORE MORE+</ion-button>
+                    <ion-button color="background" size="small" shape="round" (click)="main.scrollToBottom(1500)">EXPLORE MORE+</ion-button>
                 </div>
 
             </ion-slide>
@@ -75,7 +75,7 @@
 
         </ion-slides>
 
-        <ion-item-divider id="products">
+        <ion-item-divider color="background" id="products">
             <ion-label slot="start">
                 Most Popular
             </ion-label>
