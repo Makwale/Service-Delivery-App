@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Component, OnInit } from '@angular/core';
+import { Product } from '../models/product.model';
+import { CartService } from '../services/cart.service';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +27,65 @@ export class HomePage {
     slidesPerView: 2,
     spaceBetween : 10
   }
-  constructor() {}
+
+  productList : Product[] = [];
+  category = "All";
+  tempList;
+  constructor(private productService: ProductService, private cartService: CartService) {
+  }
+
+  ngOnInit() {
+    this.getProducts()
+   
+  }
+
+  
+	getProducts(){
+    this.productService.getProduct().subscribe(data => {
+      for(let index = 0; index < data.length; index++){
+        let temp = data[index];
+        this.productList.push(new Product(index, temp["name"], temp["description"], temp["cat"], temp["price"], temp["url"]))
+        this.tempList = this.productList;
+      }
+      
+    })
+	}
+
+  // this is the mothod you have to pay attention on
+// i passed the product as argument
+// check on the component constructor, i created sersionService object
+// that object is the one will be used to add product to the cart
+  addToCart(product: Product){
+  
+      if(!this.cartService.equal(product)){
+        // we asume the product doesnt exist in the cart
+        // so we add our product by calling the addItemToList
+        // addItemToList is a method declared in CartService
+        this.cartService.addItemToList(product);
+      }else{
+        alert("Product Exist");
+      }
+    }
+   
+
+    filter(cat){
+      switch(cat){
+        case 'f':
+          this.category = "Fast Food";
+          break;
+        case 'b':
+          this.category = "Burgers";
+          break;
+        case 'p':
+          this.category = "Pizzas";
+      }
+      this.productList = this.tempList.filter( c =>  c.getCategory() == cat);
+    }
+
+    viewAll(){
+      this.productList = this.tempList;
+    }
+
+  
 
 }

@@ -7,6 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { AngularFireModule } from '@angular/fire/firebase.app.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { HomePageRoutingModule } from './home-routing.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    MatCardModule
+    MatCardModule,
+  
   ],
   declarations: [HomePage]
 })

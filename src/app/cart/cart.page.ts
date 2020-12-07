@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from '../models/item.model';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartPage implements OnInit {
 
-  constructor() { }
+  constructor(public cartService: CartService) { }
 
   ngOnInit() {
+    console.log(this.cartService.getTotalPrice())
+
+  }
+
+  deleteItem(item: Item){
+		this.cartService.deleteItem(item.getId());
+		
+	}
+
+	getTotalPrice(){
+		return this.cartService.getTotalPrice()
+	}
+
+	increasingQnty(item: Item){
+		this.cartService.increasingQnty(item.getId());
+	}
+
+	decreasingQnty(item: Item){
+		if(item.getQuantity() > 1)
+			this.cartService.decreasingQnty(item.getId());
+  }
+  
+  checkout(){
+    console.log(this.getTotalPrice());
   }
 
 }
