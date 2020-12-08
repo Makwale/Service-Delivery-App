@@ -1,33 +1,27 @@
 <ion-header>
-  <ion-toolbar color="background">
-    <ion-title>Checkout</ion-title>
+    <ion-toolbar color="background">
+        <ion-title>Checkout</ion-title>
 
-    <ion-buttons slot="end">
-    	<ion-icon size="large" (click)="dismis()" name="close"></ion-icon>
-    </ion-buttons>
-  </ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-icon size="large" (click)="dismis()" name="close"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<div id="container" style="margin-top: 50px;">
-        <ion-item>
-            <ion-label position="stacked">First Name</ion-label>
-            <ion-input type="text" #fname>
-                <ion-icon slot="start" name="person"></ion-icon>
-            </ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label position="stacked">Last Name</ion-label>
-            <ion-input type="text" #lname>
-                <ion-icon slot="start" name="person"></ion-icon>
-            </ion-input>
-        </ion-item>
+    <div id="container" style="margin-top: 50px;">
 
         <ion-item>
             <ion-label position="stacked">Phone Number</ion-label>
             <ion-input type="tel" #phone>
                 <ion-icon slot="start" name="call"></ion-icon>
+            </ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="stacked">House Number</ion-label>
+            <ion-input type="number" #house>
+                <ion-icon slot="start" name="home"></ion-icon>
             </ion-input>
         </ion-item>
 
@@ -38,12 +32,11 @@
             </ion-input>
         </ion-item>
 
-        <ion-item #locAddress *ngFor="let address of addresses; let i=index" (click)="select(address)">
-        {{address}}
-   		 </ion-item> <br>
+        <ion-item #locAddress *ngFor="let address of addresses; let i=index" (click)="select(address, i)">
+            {{address}}
+        </ion-item> <br>
 
-        <ion-button shape="round" color="dark" expand="block" fill="solid" (click)="checkout()">Checkout</ion-button>
-       </div>
-   
+        <ion-button shape="round" color="dark" expand="block" fill="solid" (click)="checkout(phone.value, house.value, address.value)">Checkout</ion-button>
+    </div>
+
 </ion-content>
-

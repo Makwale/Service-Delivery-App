@@ -36,16 +36,16 @@ export class MapPage implements OnInit {
 
    	 	this.map.addControl(new mapboxgl.NavigationControl());
    	 	
-   	//  	this.direction =  new MapboxDirections({
-		  //     accessToken: mapboxgl.accessToken,
-		  //     profile: "mapbox/driving",
-		  //     alternatives: true,
-		  //     congestion: true,
-		  //     unit: "metric",
-		  //     controls: {instructions: false}
-		  // })
+   	 	this.direction =  new MapboxDirections({
+		      accessToken: mapboxgl.accessToken,
+		      profile: "mapbox/driving",
+		      alternatives: true,
+		      congestion: true,
+		      unit: "metric",
+		      controls: {instructions: false}
+		  })
 
-		//this.map.addControl(this.direction,'bottom-left');
+		this.map.addControl(this.direction,'bottom-left');
 
 		this.map.addControl(new mapboxgl.FullscreenControl());
 
@@ -64,7 +64,6 @@ export class MapPage implements OnInit {
   	this.direction.setOrigin([28.168399, -25.70587]);
   	this.direction.setDestination([28.14796,-25.67029]);
 
-  	console.log(this.direction.getWaypoints());
   }
 
 

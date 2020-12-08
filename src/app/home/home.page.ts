@@ -46,12 +46,13 @@ export class HomePage {
   
 	getProducts(){
     this.productService.getProduct().subscribe(data => {
-      for(let index = 0; index < data.length; index++){
-        let temp = data[index];
-        this.productList.push(new Product(index, temp["name"], temp["description"], temp["cat"], temp["price"], temp["url"]))
-        this.tempList = this.productList;
+      let index = 0;
+      for(let documentCh of data){
+        let product = documentCh.payload.doc.data();
+        let id = documentCh.payload.doc.id;
+        this.productList.push(new Product(id,index, product["name"], product["description"],  product["cat"], product["price"], product["url"]))
       }
-      
+      this.tempList = this.productList;
     })
 	}
 

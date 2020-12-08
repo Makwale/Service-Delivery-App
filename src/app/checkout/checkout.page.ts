@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, retry } from 'rxjs/operators';
+import { DatabaseService } from '../services/database.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 export interface MapboxOutput {
   attribution: string;
@@ -30,9 +32,8 @@ export class CheckoutPage implements OnInit {
   addresses = [];
   list = [];
   searchRef;
-
-  constructor(public modalController: ModalController, private http: HttpClient) { }
-
+  coords;
+  constructor(public modalController: ModalController, private http: HttpClient, public dbs: DatabaseService){}
   ngOnInit() {
   }
 
@@ -58,10 +59,12 @@ export class CheckoutPage implements OnInit {
       }));
   }
 
-  select(value){
+  select(value, index){
     this.searchRef.value = value;
+    this.coords = this.coordinates[index];
     this.addresses = [];
-    console.log(value);
+    this.coordinates = [];
+    
   }
 
   dismis(){
@@ -69,4 +72,11 @@ export class CheckoutPage implements OnInit {
       'dismissed': true
     });
   }
+
+  checkout( phone, house, streetName){
+    
+   this.dbs.order(phone, house, streetName, this.coords)
+
+  }
+  
 }

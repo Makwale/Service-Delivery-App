@@ -7,6 +7,9 @@ import { AuthService } from '../services/auth.service';
 import { DatabaseService } from '../services/database.service';
 import { ModalController } from '@ionic/angular';
 import { RegisterPage } from '../register/register.page';
+import { AccountService } from '../services/account.service';
+import { Customer } from '../models/account.model';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -24,7 +27,8 @@ export class AccountPage implements OnInit {
   constructor( private authService: AuthService, 
     private databaseService: DatabaseService, 
     private router: Router, 
-    public modalController: ModalController) { }
+    public modalController: ModalController,
+    private accs: AccountService, private afs: AngularFirestore) { }
 
 
 
@@ -46,7 +50,12 @@ export class AccountPage implements OnInit {
   
   logingWithEmailAndPassword(username: string, password: string){
 		this.authService.logingWithEmailAndPassword(username, password).then( userCredential => {
-      this.dismis()
+      this.afs.collection("Customer", ref => ref.where("email" , "==" , `${username}`)).valueChanges().subscribe(data =>{
+        let customer: Customer = data[0] as unknown as Customer;
+        this.accs.setCustomer(customer as Customer);
+         this.dismis()
+      })
+      
     }).catch(error => {
       alert(error.message);
     })

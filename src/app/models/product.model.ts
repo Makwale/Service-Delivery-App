@@ -1,6 +1,8 @@
+import { ThrowStmt } from '@angular/compiler';
 import { VirtualTimeScheduler } from 'rxjs';
 
 export class  Product{
+    private ref : string;
 
     private id: number;
 
@@ -14,7 +16,9 @@ export class  Product{
 
     private url: string;
 
-    constructor(id: number, name: string, description: string, cat: string, price: number, url: string){
+    constructor(ref: string,id: number, name: string, description: string, cat: string, price: number, url: string){
+        this.ref = ref;
+
         this.id = id;
         
         this.name = name;
@@ -28,6 +32,9 @@ export class  Product{
         this.url = url;
     }
 
+    public getRef(): string{
+        return this.ref;
+    }
     public getId(): number{
         return this.id;
     }
@@ -50,6 +57,10 @@ export class  Product{
 
     public getURL(): string{
         return this.url;
+    }
+
+    equal(product: Product){
+        return this.getRef() == product.getRef();
     }
 
 

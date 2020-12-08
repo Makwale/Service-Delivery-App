@@ -65,7 +65,7 @@ export class CartService {
 
 	equal(product: Product): boolean{
         for(let item of this.itemsList){
-          if(item.getProduct().getId() == product.getId()){
+          if(item.getProduct().equal(product)){
             return true;
           }
         }

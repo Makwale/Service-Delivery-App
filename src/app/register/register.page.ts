@@ -24,7 +24,7 @@ export class RegisterPage implements OnInit {
   		creatUserWithEmailAndPassword(email, password).then(userCredential => {
         this.databaseService.creatUserAccount(userCredential.user.uid,
           fname, lname,
-          phone)
+          phone, email)
         this.dismis()
 
       }).catch(error =>{
