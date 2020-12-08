@@ -1,9 +1,14 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-icon id="brand" name="locate-outline" slot="start"></ion-icon>
+    <ion-toolbar color="background">
+        <ion-icon id="brand" name="locate" slot="start"></ion-icon>
         <h4>
             <span style="font-size: 70%;">Delivery to</span><br><span style="font-size: 90%;">Pretoria</span></h4>
-        <ion-icon id="notification" name="notifications-outline" slot="end"></ion-icon>
+
+        <ion-buttons slot="end">
+            <ion-button class="ion-margin" size="small" color="dark" fill="solid" style=" color: #d8e614" shape="round" (click)="login()" name="close">Login</ion-button>
+            <ion-icon class="ion-margin" id="notification" name="notifications"></ion-icon>
+        </ion-buttons>
+        
     </ion-toolbar>
 </ion-header>
 
@@ -22,7 +27,7 @@
             <ion-row id="cat_row">
                 <ion-col size="3">
 
-                    <ion-avatar (click)="filter('f')">
+                    <ion-avatar (click)="filter('f', main)">
                         <img src="../assets/images/fastFood.jpg">
                     </ion-avatar>
                     <ion-label class="category"><b>Fast Food</b></ion-label>
@@ -30,7 +35,7 @@
 
                 <ion-col size="3">
 
-                    <ion-avatar (click)="filter('p')">
+                    <ion-avatar (click)="filter('p', main)">
                         <img src="../assets/images/pizza.jpg">
                     </ion-avatar>
                     <ion-label class="category" style="margin-left: 12px;"><b>Pizza</b></ion-label>
@@ -38,7 +43,7 @@
 
                 <ion-col size="3">
 
-                    <ion-avatar (click)="filter('b')">
+                    <ion-avatar (click)="filter('b', main)">
                         <img src="../assets/images/burger.jpg">
                     </ion-avatar>
                     <ion-label class="category" style="margin-left: 11px;"><b>Burger</b></ion-label>
@@ -46,7 +51,7 @@
 
                 <ion-col size="3">
 
-                    <ion-avatar (click)="filter('t')">
+                    <ion-avatar (click)="filter('t', main)">
                         <img src="../assets/images/traditional.jpg">
                     </ion-avatar>
                     <ion-label class="category"><b>Traditional</b></ion-label>
@@ -60,7 +65,7 @@
                 <div id="slide_one_div">
                     <h4>Get 20% off <br><span>on your first order</span>
                     </h4>
-                    <ion-button size="small" shape="round" color="light" (click)="main.scrollToBottom(1500)">EXPLORE MORE+</ion-button>
+                    <ion-button size="small" shape="round" color="background" (click)="main.scrollToBottom(1500)">EXPLORE MORE+</ion-button>
                 </div>
 
             </ion-slide>

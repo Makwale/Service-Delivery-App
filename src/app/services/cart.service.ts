@@ -1,6 +1,6 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
-import { timeStamp } from 'console';
+
 import { Item } from '../models/item.model';
 import { Product } from '../models/product.model';
 
@@ -31,7 +31,7 @@ export class CartService {
       this.totalItems++;
     
       this.setTotalPrice(product);
-      console.log(this.getTotalItems())
+
   }
 
   getTotalItems(){ return this.getItemList().length}

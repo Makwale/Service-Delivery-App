@@ -36,16 +36,16 @@ export class MapPage implements OnInit {
 
    	 	this.map.addControl(new mapboxgl.NavigationControl());
    	 	
-   	 	this.direction =  new MapboxDirections({
-		      accessToken: mapboxgl.accessToken,
-		      profile: "mapbox/driving",
-		      alternatives: true,
-		      congestion: true,
-		      unit: "metric",
-		      controls: {instructions: false}
-		  })
+   	//  	this.direction =  new MapboxDirections({
+		  //     accessToken: mapboxgl.accessToken,
+		  //     profile: "mapbox/driving",
+		  //     alternatives: true,
+		  //     congestion: true,
+		  //     unit: "metric",
+		  //     controls: {instructions: false}
+		  // })
 
-		this.map.addControl(this.direction,'bottom-left');
+		//this.map.addControl(this.direction,'bottom-left');
 
 		this.map.addControl(new mapboxgl.FullscreenControl());
 

@@ -5,6 +5,9 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { DatabaseService } from '../services/database.service';
+import { ModalController } from '@ionic/angular';
+import { RegisterPage } from '../register/register.page';
+
 
 @Component({
   selector: 'app-account',
@@ -13,64 +16,39 @@ import { DatabaseService } from '../services/database.service';
 })
 export class AccountPage implements OnInit {
 	isRegistered = true;
+  isSignedIn = false;
   name = "Login";
   
- 
-
-  formControlFName = new FormControl('');
-	formControlLName = new FormControl('');
-	formControlPhone = new FormControl('');
-	formControlEmail = new FormControl('');
-	formControlPassword = new FormControl('');
-	formControlCPassword = new FormControl('');
   isAccountCreated = false;
-  
-  emailControl = new FormControl('', [Validators.required, Validators.email]);
-  passwordControl = new FormControl('', [Validators.required]);
-  emailError = new ErrorStateMatcher();
-  passwordError = new ErrorStateMatcher();
 
-  constructor( private authService: AuthService, private databaseService: DatabaseService, private router: Router) { }
+  constructor( private authService: AuthService, 
+    private databaseService: DatabaseService, 
+    private router: Router, 
+    public modalController: ModalController) { }
 
 
 
   ngOnInit() {
   }
 
-  register(){
-  	this.name = "Register";
-  	this.isRegistered = false;
+  async register(){
+  	const modal = await this.modalController.create({
+      component: RegisterPage,
+    });
+    return await modal.present();
   }
 
-  registerUser(fname: string, lname:string, phone: string, email: string, password: string){
-  	this.authService.
-  		creatUserWithEmailAndPassword(email, password).then(userCredential => {
-        this.databaseService.creatUserAccount(userCredential.user.uid,
-          fname, lname,
-          phone)
-      }).catch(error =>{
-        window.alert(error.message);
-      })
-  }
-
-  	results(res){
-		res.then(userCredential => {
-			this.creatAccount(userCredential.user.uid);
-			this.isAccountCreated = true;
-		}).catch(error =>{
-			window.alert(error.message);
-		})
-	}
-
-	creatAccount(uid){
-		this.databaseService.creatUserAccount(uid,
-		 this.formControlFName.value, this.formControlLName.value,
-		 this.formControlPhone.value)
+  dismis(){
+    this.modalController.dismiss({
+      'dismissed': true
+    });
   }
   
   logingWithEmailAndPassword(username: string, password: string){
 		this.authService.logingWithEmailAndPassword(username, password).then( userCredential => {
-      this.router.navigateByUrl("tabs/home");
+      this.dismis()
+    }).catch(error => {
+      alert(error.message);
     })
 	}
 

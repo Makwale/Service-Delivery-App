@@ -12,6 +12,18 @@ const routes: Routes = [
     path: 'tab',
     loadChildren: () => import('./tab/tab.module').then( m => m.TabPageModule)
   },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+      path: 'account',
+      loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+  },  {
+    path: 'checkout',
+    loadChildren: () => import('./checkout/checkout.module').then( m => m.CheckoutPageModule)
+  }
+
   
 ];
 

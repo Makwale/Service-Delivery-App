@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -24,6 +24,7 @@ import { environment } from 'src/environments/environment';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule,
+  HttpClientModule,
   AngularFireModule.initializeApp( environment.firebaseConfig),
   AngularFireAuthModule,
   AngularFireDatabaseModule,
@@ -31,9 +32,11 @@ import { environment } from 'src/environments/environment';
   IonicModule.forRoot(), 
   AppRoutingModule, 
   BrowserAnimationsModule
+ 
   ],
   providers: [
     StatusBar,
+    HttpClient,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

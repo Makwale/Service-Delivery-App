@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product.model';
 import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
+import { AccountPage } from '../account/account.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +33,9 @@ export class HomePage {
   productList : Product[] = [];
   category = "All";
   tempList;
-  constructor(private productService: ProductService, private cartService: CartService) {
+  constructor(private productService: ProductService,
+   private cartService: CartService,
+   public modalController: ModalController) {
   }
 
   ngOnInit() {
@@ -68,7 +72,7 @@ export class HomePage {
     }
    
 
-    filter(cat){
+    filter(cat, ref){
       switch(cat){
         case 'f':
           this.category = "Fast Food";
@@ -79,13 +83,21 @@ export class HomePage {
         case 'p':
           this.category = "Pizzas";
       }
+
       this.productList = this.tempList.filter( c =>  c.getCategory() == cat);
+      ref.scrollToBottom(1500)
     }
 
     viewAll(){
       this.productList = this.tempList;
+      this.category = "All"
     }
 
-  
+    async login(){
+      const modal = await this.modalController.create({
+        component: AccountPage,
+      });
+      return await modal.present();
+    }
 
 }

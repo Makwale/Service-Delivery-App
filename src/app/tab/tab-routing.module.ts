@@ -14,10 +14,7 @@ const routes: Routes = [
         redirectTo: 'home',
         pathMatch: 'full'
       },
-      {
-      path: 'account',
-      loadChildren: () => import('../account/account.module').then( m => m.AccountPageModule)
-    },
+      
     {
       path: 'cart',
       loadChildren: () => import('../cart/cart.module').then( m => m.CartPageModule)
