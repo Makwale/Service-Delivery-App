@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-declare var mapboxgl: any; 
+declare var mapboxgl: any;
+declare var MapboxDirections; 
 
 @Component({
   selector: 'app-map',
