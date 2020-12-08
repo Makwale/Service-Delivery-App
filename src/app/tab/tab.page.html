@@ -8,6 +8,7 @@
             </ion-tab-button>
 
             <ion-tab-button tab="cart">
+                <ion-badge size="large" *ngIf="cartService.getTotalItems() > 0" style="background-color: black; font-size: 80%;">{{cartService.getTotalItems()}}</ion-badge>
                 <ion-icon name="basket"></ion-icon>
                 <ion-label>Basket</ion-label>
             </ion-tab-button>

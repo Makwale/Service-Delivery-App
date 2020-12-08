@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-tab',
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabPage implements OnInit {
 	appear = false;
-  constructor() { }
+  constructor(public cartService: CartService) { }
 
   ngOnInit() {
   }
-
 }
