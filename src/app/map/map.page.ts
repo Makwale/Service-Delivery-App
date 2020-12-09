@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../services/database.service';
 
 declare var mapboxgl: any;
 declare var MapboxDirections; 
@@ -13,7 +14,7 @@ export class MapPage implements OnInit {
 	lat:number;
 	lon:number;
 	direction;
-  constructor() { }
+  constructor( private dbs : DatabaseService) { }
 
   ngOnInit() {
 
@@ -62,8 +63,10 @@ export class MapPage implements OnInit {
   }
 
   trackOrder(){
-  	this.direction.setOrigin([28.168399, -25.70587]);
-  	this.direction.setDestination([28.14796,-25.67029]);
+	  this.dbs.getOrderCoors(this.direction);
+	
+  	// this.direction.setOrigin([28.168399, -25.70587]);
+  	// this.direction.setDestination([28.14796,-25.67029]);
 
   }
 

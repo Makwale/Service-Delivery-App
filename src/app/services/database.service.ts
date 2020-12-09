@@ -14,8 +14,8 @@ import { AccountService } from './account.service';
   providedIn: 'root'
 })
 export class DatabaseService {
-
-
+  coordsDe;
+  cooddsOr;
   constructor(private afs: AngularFirestore, private cart: CartService, private acc: AccountService) { }
 
   getProduct(){
@@ -33,6 +33,20 @@ export class DatabaseService {
   	}).catch(errer=>{
   		window.alert(errer.message)
   	})
+  }
+
+  getOrderCoors( direction){
+    this.afs.collection("Order", ref => ref.where("oid", "==", this.acc.customer.email)).valueChanges().subscribe(data => {
+     
+      for(let d of data){
+        this.coordsDe = d["coordsDe"];
+        this.cooddsOr = d["coordsOr"];
+      }
+      direction.setOrigin(this.cooddsOr);
+      direction.setDestination(this.coordsDe);
+    })
+
+  
   }
 
   order(phone, houseNumber, streetName, coord){

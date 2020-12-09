@@ -15,8 +15,7 @@ export class ProductService {
   }
 
   getProduct() { 
-   
-    return this.dbs.getProduct();
+   return this.dbs.getProduct();
   }
 
   
