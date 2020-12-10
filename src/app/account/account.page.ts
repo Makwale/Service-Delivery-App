@@ -10,7 +10,7 @@ import { RegisterPage } from '../register/register.page';
 import { AccountService } from '../services/account.service';
 import { Customer } from '../models/account.model';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-account',
@@ -28,7 +28,7 @@ export class AccountPage implements OnInit {
     private databaseService: DatabaseService, 
     private router: Router, 
     public modalController: ModalController,
-    private accs: AccountService, private afs: AngularFirestore) { }
+    private accs: AccountService, private afs: AngularFirestore, private toastController: ToastController) { }
 
 
 
@@ -53,11 +53,18 @@ export class AccountPage implements OnInit {
       this.afs.collection("Customer", ref => ref.where("email" , "==" , `${username}`)).valueChanges().subscribe(data =>{
         let customer: Customer = data[0] as unknown as Customer;
         this.accs.setCustomer(customer as Customer);
+        this.accs.setLoginStatus(true);
          this.dismis()
       })
       
-    }).catch(error => {
-      alert(error.message);
+    }).catch(async error => {
+      const toast = await this.toastController.create({
+        message: error.message,
+        duration: 5000,
+        color: "warning"
+      });
+      toast.present();
+     
     })
 	}
 

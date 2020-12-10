@@ -14,7 +14,6 @@ export class CartPage implements OnInit {
   constructor(public cartService: CartService, public modalController: ModalController) { }
 
   ngOnInit() {
-    console.log(this.cartService.getTotalPrice())
 
   }
 

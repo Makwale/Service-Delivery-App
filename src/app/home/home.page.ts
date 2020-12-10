@@ -5,6 +5,9 @@ import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
 import { AccountPage } from '../account/account.page';
 import { ModalController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+import { AccountService } from '../services/account.service';
+import { SearchPage } from '../search/search.page';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +38,7 @@ export class HomePage {
   tempList;
   constructor(private productService: ProductService,
    private cartService: CartService,
-   public modalController: ModalController) {
+   public modalController: ModalController, private toastController: ToastController, private accs: AccountService) {
   }
 
   ngOnInit() {
@@ -60,15 +63,31 @@ export class HomePage {
 // i passed the product as argument
 // check on the component constructor, i created sersionService object
 // that object is the one will be used to add product to the cart
-  addToCart(product: Product){
-  
-      if(!this.cartService.equal(product)){
-        // we asume the product doesnt exist in the cart
-        // so we add our product by calling the addItemToList
-        // addItemToList is a method declared in CartService
-        this.cartService.addItemToList(product);
+  async addToCart(product: Product){
+
+      if(this.accs.getLoginStatus()){
+        if(!this.cartService.equal(product)){
+          // we asume the product doesnt exist in the cart
+          // so we add our product by calling the addItemToList
+          // addItemToList is a method declared in CartService
+          this.cartService.addItemToList(product);
+        
+        }else{
+          const toast = await this.toastController.create({
+            message: 'Product already added into your cart',
+            duration: 3000,
+            color: "dark"
+          });
+          toast.present();
+        }
+
       }else{
-        alert("Product Exist");
+         const toast = await this.toastController.create({
+            message: 'Login to start making orders',
+            duration: 3000,
+            color: "dark"
+          });
+          toast.present();
       }
     }
    
@@ -97,6 +116,13 @@ export class HomePage {
     async login(){
       const modal = await this.modalController.create({
         component: AccountPage,
+      });
+      return await modal.present();
+    }
+
+    async searchProduct(){
+      const modal = await this.modalController.create({
+        component: SearchPage,
       });
       return await modal.present();
     }

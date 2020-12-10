@@ -1,4 +1,4 @@
-package www.sda.emma;
+package com.sda.emma;
 
 import android.os.Bundle;
 

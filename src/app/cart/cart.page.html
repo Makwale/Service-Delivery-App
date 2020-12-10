@@ -51,7 +51,13 @@
         </ion-row>
 
     </ion-grid>
+
+    <div style="text-align: center; margin-top: 50%; color: lightgray;">
+        <h2 *ngIf="cartService.getItemList().length == 0">Basket is empty</h2>
+    </div>
 </ion-content>
+
+
 
 <ion-footer>
     <ion-toolbar color="dark">
@@ -60,6 +66,6 @@
 
 
         <ion-label slot="end">Total price</ion-label>
-        <ion-label  class="ion-margin" slot="end"><b>{{getTotalPrice() | currency: 'R'}}</b></ion-label>
+        <ion-label class="ion-margin" slot="end"><b>{{getTotalPrice() | currency: 'ZAR '}}</b></ion-label>
     </ion-toolbar>
 </ion-footer>

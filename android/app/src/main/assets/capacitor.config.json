@@ -1,5 +1,5 @@
 {
-  "appId": "www.sda.emma",
+  "appId": "com.sda.emma",
   "appName": "SDA",
   "bundledWebRuntime": false,
   "npmClient": "npm",

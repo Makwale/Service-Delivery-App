@@ -37,12 +37,12 @@ export class DatabaseService {
 
   getOrderCoors( direction){
     this.afs.collection("Order", ref => ref.where("oid", "==", this.acc.customer.email)).valueChanges().subscribe(data => {
-     
+      alert("Changes on database");
       for(let d of data){
         this.coordsDe = d["coordsDe"];
         this.cooddsOr = d["coordsOr"];
       }
-      direction.setOrigin(this.cooddsOr);
+      //direction.setOrigin(this.cooddsOr);
       direction.setDestination(this.coordsDe);
     })
 

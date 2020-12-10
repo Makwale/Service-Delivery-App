@@ -33,7 +33,7 @@ export class MapPage implements OnInit {
 	        countries: 'za',
 	        style: 'mapbox://styles/mapbox/dark-v10',
 	        center: [this.lon, this.lat],
-	        zoom: 12,
+	        zoom: 4,
    	 	});
 
    	 	this.map.addControl(new mapboxgl.NavigationControl());
@@ -58,11 +58,16 @@ export class MapPage implements OnInit {
 			trackUserLocation: true
 		}));
 
+
+		
+		
+
  	})
 
   }
 
   trackOrder(){
+
 	  this.dbs.getOrderCoors(this.direction);
 	
   	// this.direction.setOrigin([28.168399, -25.70587]);
