@@ -36,6 +36,7 @@ export class HomePage {
   productList : Product[] = [];
   category = "All";
   tempList;
+  isImageLoading;
   constructor(private productService: ProductService,
    private cartService: CartService,
    public modalController: ModalController, private toastController: ToastController, private accs: AccountService) {
@@ -44,6 +45,14 @@ export class HomePage {
   ngOnInit() {
     this.getProducts()
    
+  }
+
+  isLoading(){
+    this.isImageLoading = true;
+  }
+
+  isLoaded(){
+    this.isImageLoading = false;
   }
 
   
@@ -92,20 +101,26 @@ export class HomePage {
     }
    
 
-    filter(cat, ref){
+    async filter(cat, ref){
+      let categ;
       switch(cat){
         case 'f':
-          this.category = "Fast Food";
+          categ = cat;
           break;
         case 'b':
-          this.category = "Burgers";
+          categ = cat
           break;
         case 'p':
-          this.category = "Pizzas";
+          categ = cat;
       }
 
-      this.productList = this.tempList.filter( c =>  c.getCategory() == cat);
-      ref.scrollToBottom(1500)
+      const modal = await this.modalController.create({
+        component: SearchPage,
+        componentProps: {
+          'category' : categ
+        }
+      });
+      return await modal.present();
     }
 
     viewAll(){

@@ -86,10 +86,16 @@
             height: 100;
         }
         
-        #items_contaner {
+        .items_contaner {
             height: 230px;
             overflow-x: scroll;
             overflow-y: hidden;
+            white-space: nowrap;
+            margin-bottom: 10px;
+        }
+
+        .items_contaners {
+            height: 230px;
             white-space: nowrap;
             margin-bottom: 10px;
         }
@@ -102,7 +108,17 @@
         #items_contaner::-webkit-scrollbar {
             display: none;
         }
+
+        .search_card{
+            height: 100%;
+            width: 150px;
+            display: inline-block;
+            margin-right: 1px;
+        }
         
+        .icon{
+            margin-right: 7px;
+        }
         .item_card {
             height: 100%;
             width: 200px;

@@ -71,6 +71,10 @@ export class DatabaseService {
           oRef: docRef.id,
         })
       }
+
+      return true;
     })
+
+    return false;
   }
 }

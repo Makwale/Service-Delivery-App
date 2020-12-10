@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, retry } from 'rxjs/operators';
 import { DatabaseService } from '../services/database.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ToastController } from '@ionic/angular';
 
 export interface MapboxOutput {
   attribution: string;
@@ -33,7 +34,7 @@ export class CheckoutPage implements OnInit {
   list = [];
   searchRef;
   coords;
-  constructor(public modalController: ModalController, private http: HttpClient, public dbs: DatabaseService){}
+  constructor(public modalController: ModalController, private toastController: ToastController, private http: HttpClient, public dbs: DatabaseService){}
   ngOnInit() {
   }
 
@@ -73,9 +74,16 @@ export class CheckoutPage implements OnInit {
     });
   }
 
-  checkout( phone, house, streetName){
+  async checkout( phone, house, streetName){
     
-   this.dbs.order(phone, house, streetName, this.coords)
+   if(this.dbs.order(phone, house, streetName, this.coords)){
+      const toast = await this.toastController.create({
+            message: 'Your order is succesful',
+            duration: 3000,
+            color: "success"
+          });
+      toast.present();
+   }
 
   }
   
