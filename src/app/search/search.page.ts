@@ -13,12 +13,13 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
-	@Input() category : string;
+  @Input() category : string;
+  
 	productList : Product[] = [];
  
   tempList;
-  isImageLoading;
-  isSearch = false;
+  isImageLoaded = false;
+  isSearch = true;
   constructor(private productService: ProductService,
    private cartService: CartService,
    public modalController: ModalController, private toastController: ToastController, private accs: AccountService) { }
@@ -26,7 +27,7 @@ export class SearchPage implements OnInit {
   ngOnInit() {
   	
   	this.getProducts();
-
+  
   }
 
   async addToCart(product: Product){
@@ -76,6 +77,18 @@ export class SearchPage implements OnInit {
     })
 	}
 
+  isLoading(){
+    alert("Loading");
+    this.isImageLoaded = false;
+  }
+
+  isLoaded(){
+    alert("Loaded");
+    this.isImageLoaded = true;
+  }
+
+  
+
 	dismis(){
 		this.modalController.dismiss({
 		      'dismissed': true
@@ -89,8 +102,10 @@ export class SearchPage implements OnInit {
 	}
 
 	searchProductByCat(){
-		this.isSearch = true;
-		 this.productList = this.tempList.filter( c =>  c.getCategory() == this.category);
+     this.productList = this.tempList.filter( c =>  c.getCategory() == this.category);
+     for(let product of this.productList){
+       console.log(product.getURL());
+     }
       
 	}
 }

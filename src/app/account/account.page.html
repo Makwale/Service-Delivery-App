@@ -15,7 +15,7 @@
     <div id="acc_container" *ngIf="!isSignedIn">
         <ion-item>
             <ion-label position="stacked">Email</ion-label>
-            <ion-input  type="email" #username required>
+            <ion-input type="email" #username required>
                 <ion-icon class="icon" slot="end" name="mail"></ion-icon>
             </ion-input>
         </ion-item>
@@ -27,7 +27,7 @@
             </ion-input>
         </ion-item>
 
-        <ion-button shape="round" color="dark" expand="block" fill="solid" (click)="logingWithEmailAndPassword(username.value, password.value)">Login</ion-button>
+        <ion-button style="margin-top: 10px;" shape="round" color="dark" expand="block" fill="solid" (click)="logingWithEmailAndPassword(username.value, password.value)">Login</ion-button>
     </div>
 
 

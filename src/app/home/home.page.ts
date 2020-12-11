@@ -117,7 +117,7 @@ export class HomePage {
       const modal = await this.modalController.create({
         component: SearchPage,
         componentProps: {
-          'category' : categ
+          'category' : categ,
         }
       });
       return await modal.present();
