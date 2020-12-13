@@ -8,6 +8,9 @@ import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { AccountService } from '../services/account.service';
 import { SearchPage } from '../search/search.page';
+import { CategorysearchPage } from '../categorysearch/categorysearch.page';
+import { OrdersPage } from '../orders/orders.page';
+
 
 @Component({
   selector: 'app-home',
@@ -33,37 +36,52 @@ export class HomePage {
     spaceBetween : 10
   }
 
-  productList : Product[] = [];
-  category = "All";
+  productList: Product[];
   tempList;
-  isImageLoading;
-  constructor(private productService: ProductService,
+  isProductsLoaded = false;
+  isImgLoading = true;
+  isImgLoaded;
+
+  constructor(public productService: ProductService,
    private cartService: CartService,
-   public modalController: ModalController, private toastController: ToastController, private accs: AccountService) {
+   public modalController: ModalController,
+   public modalController2: ModalController,
+   private toastController: ToastController,
+    public accs: AccountService) {
   }
 
   ngOnInit() {
+     this.productList = [];
+     this.filter = [];
     this.getProducts()
-   
   }
 
-  isLoading(){
-    this.isImageLoading = true;
+  isImageLoading(){
+    this.isImgLoading = true;
   }
 
-  isLoaded(){
-    this.isImageLoading = false;
+  isImageLoaded(){
+    this.isImgLoading = false;
+  }
+
+  async navigateToOrders(){
+    const modal = await this.modalController.create({
+        component: OrdersPage,
+      });
+      return await modal.present();
   }
 
   
 	getProducts(){
-    this.productService.getProduct().subscribe(data => {
+   
+    this.productService.getProducts().subscribe(data => {
       let index = 0;
       for(let documentCh of data){
         let product = documentCh.payload.doc.data();
         let id = documentCh.payload.doc.id;
         this.productList.push(new Product(id,index, product["name"], product["description"],  product["cat"], product["price"], product["url"]))
       }
+      this.isProductsLoaded = true;
       this.tempList = this.productList;
     })
 	}
@@ -101,34 +119,26 @@ export class HomePage {
     }
    
 
-    async filter(cat, ref){
-      let categ;
-      switch(cat){
-        case 'f':
-          categ = cat;
-          break;
-        case 'b':
-          categ = cat
-          break;
-        case 'p':
-          categ = cat;
+    async filter(cat){
+      var products = [];
+      if(cat != 'f'){
+        products = 
+        this.tempList.filter( c => c.getCategory() == cat);
+      }else{
+        products = this.tempList;
       }
-
+      
       const modal = await this.modalController.create({
-        component: SearchPage,
+        component: CategorysearchPage,
         componentProps: {
-          'category' : categ,
+          'productList' : products,
         }
       });
       return await modal.present();
     }
 
-    viewAll(){
-      this.productList = this.tempList;
-      this.category = "All"
-    }
-
     async login(){
+      this.productList = [];
       const modal = await this.modalController.create({
         component: AccountPage,
       });
@@ -136,7 +146,7 @@ export class HomePage {
     }
 
     async searchProduct(){
-      const modal = await this.modalController.create({
+      const modal = await this.modalController2.create({
         component: SearchPage,
       });
       return await modal.present();

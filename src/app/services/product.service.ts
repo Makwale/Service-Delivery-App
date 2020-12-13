@@ -9,14 +9,17 @@ import { DatabaseService } from './database.service';
 })
 export class ProductService {
   productList;
-  constructor(private dbs: DatabaseService) { 
 
-    
+  constructor(private dbs: DatabaseService) {     
+  
   }
 
-  getProduct() { 
-   return this.dbs.getProduct();
+  getProducts() { 
+   return this.dbs.getProducts();
   }
+
+  
+
 
   
 }

@@ -7,7 +7,7 @@ import { Customer } from '../models/account.model';
 })
 export class AccountService {
   customer: Customer;
-  loginStatus;
+  loginStatus = false;
   constructor() { }
   
   public setCustomer( customer: Customer){

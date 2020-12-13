@@ -1,11 +1,11 @@
 <ion-content>
-    <ion-searchbar #proName (ionInput)="searchProduct(proName.value)" placeholder="Search by product name"  search-icon="undefined">
+    <ion-searchbar #proName (ionInput)="searchProduct(proName.value)" placeholder="Search by product name" search-icon="undefined">
         <ion-icon style="margin-right: 10px; margin-left: 5px;" (click)="dismis()" slot="start" name="arrow-back" size="large"></ion-icon>
     </ion-searchbar>
 
 
-    <div *ngIf="filteredProducts.length > 0" class="itemscontaner">
-        <ion-card *ngFor="let product of filteredProducts" class="itemcard">
+    <div  class="itemscontaner">
+        <ion-card *ngFor="let product of productList" class="itemcard">
 
             <img [src]='product.getURL()'>
 

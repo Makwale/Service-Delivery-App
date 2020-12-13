@@ -8,6 +8,10 @@ import { Product } from '../models/product.model';
 import { CartService } from './cart.service';
 import { Customer } from '../models/account.model';
 import { AccountService } from './account.service';
+import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+
 
 
 @Injectable({
@@ -16,22 +20,50 @@ import { AccountService } from './account.service';
 export class DatabaseService {
   coordsDe;
   cooddsOr;
-  constructor(private afs: AngularFirestore, private cart: CartService, private acc: AccountService) { }
+  constructor(private toastController: ToastController, public loadingController: LoadingController,
+    private afs: AngularFirestore,
+     private cart: CartService,
+      private acc: AccountService,
+       public modalController: ModalController) { }
 
-  getProduct(){
+
+  getProducts(){
     return this.afs.collection("Prod").snapshotChanges();
   }
 
-  creatUserAccount(uid, fname, lname, phone, emailadd){
-  	this.afs.collection('Customer').doc(uid).set({
+  async creatUserAccount(uid, fname, lname, phone, emailadd){
+  	
+    const loading = await this.loadingController.create({
+      message: 'Creating account, Please wait...',
+      cssClass: 'my-custom-loading-class'
+    });
+    await loading.present();
+
+    this.afs.collection('Customer').doc(uid).set({
   		firstName: fname,
   		lastName: lname,
       phone: phone,
       email: emailadd
-  	}).then(()=>{
-  		window.alert("Accout created");
-  	}).catch(errer=>{
-  		window.alert(errer.message)
+  	}).then(async ()=>{
+  		const toast = await this.toastController.create({
+            message: 'Account created successfully',
+            duration: 3000,
+            color: "success"
+          });
+      loading.dismiss();
+      toast.present();
+
+      this.modalController.dismiss({
+      'dismissed': true
+      });
+  	}).catch(async errer=>{
+  		const toast = await this.toastController.create({
+            message: errer.message,
+            duration: 3000,
+            color: "success"
+          });
+      loading.dismiss();
+      toast.present();
   	})
   }
 
@@ -49,8 +81,13 @@ export class DatabaseService {
   
   }
 
-  order(phone, houseNumber, streetName, coord){
-    
+  async order(phone, houseNumber, streetName, coord){
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      cssClass: 'my-custom-loading-class'
+    });
+    await loading.present();
+
     this.afs.collection("Order").add({
       odate: new Date(),
       oid: this.acc.customer.email,
@@ -60,7 +97,7 @@ export class DatabaseService {
       coordsOr: coord.coordinates,
       coordsDe: [0,0],
 
-    }).then(docRef => {
+    }).then( async docRef => {
       
       for(let item of this.cart.getItemList()){
         this.afs.collection("Item").add({
@@ -72,9 +109,18 @@ export class DatabaseService {
         })
       }
 
-      return true;
-    })
+      const toast = await this.toastController.create({
+            message: 'Your order is succesful',
+            duration: 3000,
+            color: "success"
+          });
+      loading.dismiss();
+      toast.present();
 
-    return false;
+    })
+  }
+
+  getOrders(){
+    return this.afs.collection("Order", ref => ref.where("oid", "==", this.acc.customer.email)).snapshotChanges();
   }
 }

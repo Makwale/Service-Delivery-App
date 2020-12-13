@@ -11,6 +11,7 @@ import { AccountService } from '../services/account.service';
 import { Customer } from '../models/account.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-account',
@@ -25,10 +26,11 @@ export class AccountPage implements OnInit {
   isAccountCreated = false;
 
   constructor( private authService: AuthService, 
-    private databaseService: DatabaseService, 
-    private router: Router, 
     public modalController: ModalController,
-    private accs: AccountService, private afs: AngularFirestore, private toastController: ToastController) { }
+    private accs: AccountService,
+     private afs: AngularFirestore,
+      private toastController: ToastController,
+      public loadingController: LoadingController) { }
 
 
 
@@ -48,12 +50,19 @@ export class AccountPage implements OnInit {
     });
   }
   
-  logingWithEmailAndPassword(username: string, password: string){
+  async logingWithEmailAndPassword(username: string, password: string){
+    const loading = await this.loadingController.create({
+      message: 'Authenticating, Please wait...',
+      cssClass: 'my-custom-loading-class'
+    });
+    await loading.present();
+
 		this.authService.logingWithEmailAndPassword(username, password).then( userCredential => {
       this.afs.collection("Customer", ref => ref.where("email" , "==" , `${username}`)).valueChanges().subscribe(data =>{
         let customer: Customer = data[0] as unknown as Customer;
         this.accs.setCustomer(customer as Customer);
         this.accs.setLoginStatus(true);
+          loading.dismiss();
          this.dismis()
       })
       
@@ -63,6 +72,7 @@ export class AccountPage implements OnInit {
         duration: 5000,
         color: "warning"
       });
+      loading.dismiss();
       toast.present();
      
     })

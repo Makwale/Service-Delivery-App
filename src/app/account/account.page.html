@@ -13,17 +13,21 @@
 <ion-content>
 
     <div id="acc_container" *ngIf="!isSignedIn">
+        <div style="text-align: center;">
+            <ion-icon style="font-size: 450%" class="icon" slot="end" name="person"></ion-icon>
+        </div>
+
         <ion-item>
             <ion-label position="stacked">Email</ion-label>
-            <ion-input type="email" #username required>
-                <ion-icon class="icon" slot="end" name="mail"></ion-icon>
+            <ion-input enterkeyhint="next" debounce=3000 type="email" #username required="true">
+                <ion-icon class="icon cart_icon" slot="end" name="mail"></ion-icon>
             </ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label position="stacked">Password</ion-label>
-            <ion-input type="password" #password required>
-                <ion-icon class="icon" slot="end" name="lock-closed"></ion-icon>
+            <ion-input enterkeyhint="go" debounce=3000 type="password" #password required="true">
+                <ion-icon class="icon cart_icon" slot="end" name="lock-closed"></ion-icon>
             </ion-input>
         </ion-item>
 

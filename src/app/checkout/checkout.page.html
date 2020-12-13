@@ -14,21 +14,21 @@
         <ion-item>
             <ion-label position="stacked">Phone Number</ion-label>
             <ion-input type="tel" #phone>
-                <ion-icon slot="start" name="call"></ion-icon>
+                <ion-icon class="icon cart_icon" slot="start" name="call"></ion-icon>
             </ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label position="stacked">House Number</ion-label>
             <ion-input type="number" #house>
-                <ion-icon slot="start" name="home"></ion-icon>
+                <ion-icon slot="start" name="home" class="icon cart_icon"></ion-icon>
             </ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label position="stacked">Physical Address</ion-label>
-            <ion-input type="email" clearInput="true" #address (keyup)="search(address)">
-                <ion-icon slot="start" name="location"></ion-icon>
+            <ion-input type="text" clearInput="true" #address (keyup)="search(address)">
+                <ion-icon slot="start" name="location" class="icon cart_icon"></ion-icon>
             </ion-input>
         </ion-item>
 

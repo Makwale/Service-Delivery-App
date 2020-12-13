@@ -26,6 +26,14 @@ const routes: Routes = [
   {
     path: 'search',
     loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
+  },
+  {
+    path: 'categorysearch',
+    loadChildren: () => import('./categorysearch/categorysearch.module').then( m => m.CategorysearchPageModule)
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('./orders/orders.module').then( m => m.OrdersPageModule)
   }
 
   

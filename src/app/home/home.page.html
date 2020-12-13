@@ -5,7 +5,10 @@
             <span style="font-size: 70%;">Delivery to</span><br><span style="font-size: 90%;">Pretoria</span></h4>
 
         <ion-buttons slot="end">
-            <ion-button class="ion-margin" size="small" color="dark" fill="solid" style=" color: #d8e614" shape="round" (click)="login()" name="close">Login</ion-button>
+            <ion-button *ngIf="!accs.getLoginStatus()" class="ion-margin" size="small" color="dark" fill="solid" style=" color: #d8e614" shape="round" (click)="login()" name="close">Login</ion-button>
+
+            <ion-button *ngIf="accs.getLoginStatus()" class="ion-margin" size="small" color="dark" fill="solid" style=" color: #d8e614" shape="round" (click)="navigateToOrders()" name="close">Orders</ion-button>
+
             <ion-icon class="ion-margin" id="notification" name="notifications"></ion-icon>
         </ion-buttons>
 
@@ -29,7 +32,7 @@
             <ion-row style=" width: 95% ; margin-left: auto; margin-right: auto;" id="cat_row">
                 <ion-col size="3">
 
-                    <ion-avatar (click)="filter('f', main)">
+                    <ion-avatar (click)="filter('f')">
                         <img src="../assets/images/fastFood.jpg">
                     </ion-avatar>
                     <ion-label class="category"><b>Fast Food</b></ion-label>
@@ -37,7 +40,7 @@
 
                 <ion-col size="3">
 
-                    <ion-avatar (click)="filter('p', main)">
+                    <ion-avatar (click)="filter('p')">
                         <img src="../assets/images/pizza.jpg">
                     </ion-avatar>
                     <ion-label class="category" style="margin-left: 12px;"><b>Pizza</b></ion-label>
@@ -45,7 +48,7 @@
 
                 <ion-col size="3">
 
-                    <ion-avatar (click)="filter('b', main)">
+                    <ion-avatar (click)="filter('b')">
                         <img src="../assets/images/burger.jpg">
                     </ion-avatar>
                     <ion-label class="category" style="margin-left: 11px;"><b>Burger</b></ion-label>
@@ -89,23 +92,62 @@
                     Most Popular
                 </ion-label>
 
-                <ion-label slot="end" class="ion-margin" color="secondary" role="button" (click)="viewAll()">View All</ion-label>
-
             </ion-item-divider>
 
-            <div *ngIf="productList" class="items_contaner">
+              <div *ngIf="!isProductsLoaded" style="height:  230px;" >
+                <div class="custom-skeleton" style="height: 100%;">
+                <ion-skeleton-text animated style="height: 100%;" ></ion-skeleton-text>
+               
+                </div>
+            
+            </div>
+
+            <div *ngIf="isProductsLoaded" class="items_contaner">
                 <ion-card *ngFor="let product of productList" class="item_card">
 
-                    <ion-img (ionImgWillLoad)="isLoading()" (ionImgDidLoad)="isLoaded()" src='{{product.getURL()}}'></ion-img>
+                
+                <ion-img (ionImgWillLoad)="isImageLoading()" (ionImgDidLoad)="isImageLoaded()" src='{{product.getURL()}}'></ion-img>
+                
 
-                    <div *ngIf="isImageLoading" style=" height: 50%">
+                    <div *ngIf="isImgLoading" style=" height: 50%">
                         <div style="height: 100%" class="custom-skeleton">
-                            <ion-skeleton-text animated style="height: 100%"></ion-skeleton-text>
+
+                            <ion-grid style="height: 100%; padding: 0px; ">
+                                <ion-row style="height: 100%; margin-top: 0px;">
+                                    <ion-col style="height: 100%; padding: 0px">
+                                        <ion-skeleton-text animated style="height: 100%; margin: 0px;"></ion-skeleton-text>
+                                    </ion-col>
+                                </ion-row>
+
+                                <ion-row style="margin-top: 5px;">
+                                    <ion-col>
+                                        <ion-skeleton-text animated style="width: 75%; height: 10px;"></ion-skeleton-text> 
+                                    </ion-col>
+                                </ion-row>
+
+                                <ion-row>
+                                    <ion-col size="6">
+                                        <ion-skeleton-text animated style="width: 45%; height: 10px;"></ion-skeleton-text>
+                                    </ion-col>
+
+                                    <ion-col style="text-align: right;" size="3">
+                                         <ion-skeleton-text animated style="width: 45%; height: 10px; margin-left: 30px"></ion-skeleton-text>
+                                    </ion-col>
+
+                                     <ion-col size="3">
+                                         <ion-skeleton-text animated style="width: 45%; height: 10px; margin-left: 10px"></ion-skeleton-text>
+                                    </ion-col>
+
+                                </ion-row>
+                            </ion-grid>
+                            
                         </div>
                     </div>
 
 
-                    <ion-grid>
+
+
+                    <ion-grid *ngIf="!isImgLoading">
                         <ion-row>
                             <ion-col size="12">
                                 <ion-card-header style="padding: 0px;">
@@ -130,11 +172,6 @@
                     </ion-grid>
 
                 </ion-card>
-
-            </div>
-
-            <div *ngIf="!productList" id="skeleton">
-                <ion-skeleton-text animated style="height: 100%"></ion-skeleton-text>
 
             </div>
 
