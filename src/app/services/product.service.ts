@@ -3,23 +3,24 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 import { DatabaseService } from './database.service';
+import { AngularFirestore, 
+  AngularFirestoreCollection,
+   AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  productList;
 
-  constructor(private dbs: DatabaseService) {     
-  
+  constructor(private afs: AngularFirestore) {     
+  	this.getProducts()
+  	
   }
+
+ 
 
   getProducts() { 
-   return this.dbs.getProducts();
+  	return this.afs.collection("Prod").snapshotChanges();
   }
-
-  
-
-
   
 }

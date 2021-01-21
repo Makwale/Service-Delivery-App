@@ -10,7 +10,7 @@
 
 <ion-content [fullscreen]="true">
     <ion-grid *ngFor="let item of cartService.getItemList()">
-        <ion-row class="item_cart">
+        <ion-row class="item_cart" style="background-color: rgba(224,187,0, .1); border: 1px solid #e0bb00">
             <ion-col size="4">
                 <img class="img_cart" src="{{item.getProduct().getURL()}}">
             </ion-col>

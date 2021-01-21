@@ -18,7 +18,7 @@ export class CartPage implements OnInit {
   }
 
   deleteItem(item: Item){
-		this.cartService.deleteItem(item.getId());
+		this.cartService.deleteItem(item.getProduct().getId());
 		
 	}
 
@@ -27,12 +27,12 @@ export class CartPage implements OnInit {
 	}
 
 	increasingQnty(item: Item){
-		this.cartService.increasingQnty(item.getId());
+		this.cartService.increasingQnty(item.getProduct().getId());
 	}
 
 	decreasingQnty(item: Item){
 		if(item.getQuantity() > 1)
-			this.cartService.decreasingQnty(item.getId());
+			this.cartService.decreasingQnty(item.getProduct().getId());
   	}
   
   async checkout(){

@@ -4,7 +4,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { DatabaseService } from '../services/database.service';
 import { ModalController } from '@ionic/angular';
 import { RegisterPage } from '../register/register.page';
 import { AccountService } from '../services/account.service';
@@ -72,6 +71,7 @@ export class AccountPage implements OnInit {
         duration: 5000,
         color: "warning"
       });
+      
       loading.dismiss();
       toast.present();
      

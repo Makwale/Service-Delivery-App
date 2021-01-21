@@ -8,7 +8,9 @@ import { UserCredential } from '../account/account.page';
 })
 export class AuthService {
   
-  constructor(private angularFrAuth: AngularFireAuth){ }
+  constructor(private angularFrAuth: AngularFireAuth){ 
+  	
+  }
 
 	async logingWithEmailAndPassword(email, password): Promise<UserCredential>{
 		return this.angularFrAuth.signInWithEmailAndPassword ( email, password) as Promise<UserCredential>;
@@ -16,14 +18,6 @@ export class AuthService {
 
 	async creatUserWithEmailAndPassword(email, password): Promise<UserCredential>{
 		return this.angularFrAuth.createUserWithEmailAndPassword ( email,  password) as Promise<UserCredential>;
-	}
-
-	async logingWithGoogle(){
-	//	return this.angularFrAuth.signInWithPopup(new this.angularFrAuth.GoogleAuthProvider());
-	}
-
-	async logingWithFacebook(){
-	//	return this.angularFrAuth.signInWithPopup(new auth.FacebookAuthProvider());
 	}
 		
 

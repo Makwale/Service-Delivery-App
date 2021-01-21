@@ -51,9 +51,24 @@ export class HomePage {
   }
 
   ngOnInit() {
-     this.productList = [];
-     this.filter = [];
-    this.getProducts()
+   this.productService.getProducts().subscribe(data => {
+     let tempVar: Product[] = []
+    
+      for(let documentCh of data){
+
+        let product = documentCh.payload.doc.data();
+      
+        let id = documentCh.payload.doc.id;
+        
+        tempVar.push(new Product(id,product["name"], product["description"],  product["cat"], product["price"], product["url"]))
+      }
+      this.isProductsLoaded = true;
+      this.productList = tempVar;
+      this.tempList = this.productList;
+      this.isProductsLoaded = true;
+    })
+
+    
   }
 
   isImageLoading(){
@@ -71,20 +86,6 @@ export class HomePage {
       return await modal.present();
   }
 
-  
-	getProducts(){
-   
-    this.productService.getProducts().subscribe(data => {
-      let index = 0;
-      for(let documentCh of data){
-        let product = documentCh.payload.doc.data();
-        let id = documentCh.payload.doc.id;
-        this.productList.push(new Product(id,index, product["name"], product["description"],  product["cat"], product["price"], product["url"]))
-      }
-      this.isProductsLoaded = true;
-      this.tempList = this.productList;
-    })
-	}
 
   // this is the mothod you have to pay attention on
 // i passed the product as argument
@@ -138,7 +139,6 @@ export class HomePage {
     }
 
     async login(){
-      this.productList = [];
       const modal = await this.modalController.create({
         component: AccountPage,
       });

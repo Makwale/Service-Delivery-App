@@ -37,6 +37,13 @@ export class MapPage implements OnInit {
    	 	});
 
    	 	this.map.addControl(new mapboxgl.NavigationControl());
+
+   	 	let el = document.createElement('img');
+		el.src = '../assets/images/logo.jpg';
+		el.className = "marker";
+
+		
+   	 	let marker = new mapboxgl.Marker(el).setLngLat([28.0514, -25.5854]).addTo(this.map);
    	 	
    	 	this.direction =  new MapboxDirections({
 		      accessToken: mapboxgl.accessToken,

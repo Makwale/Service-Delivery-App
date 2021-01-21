@@ -22,7 +22,21 @@ export class SearchPage implements OnInit {
    public modalController: ModalController, private toastController: ToastController, private accs: AccountService) { }
 
   ngOnInit() {
-    this.getProducts()
+    this.productService.getProducts().subscribe(data => {
+     let tempVar: Product[] = []
+  
+      for(let documentCh of data){
+
+        let product = documentCh.payload.doc.data();
+      
+        let id = documentCh.payload.doc.id;
+        
+        tempVar.push(new Product(id, product["name"], product["description"],  product["cat"], product["price"], product["url"]))
+      
+      }
+      this.productList = tempVar;
+      this.tempList = this.productList;
+    })
   }
 
   async addToCart(product: Product){
@@ -71,16 +85,7 @@ export class SearchPage implements OnInit {
   }
 
   getProducts(){
-    this.productService.getProducts().subscribe(data => {
-      let index = 0;
-      for(let documentCh of data){
-        let product = documentCh.payload.doc.data();
-        let id = documentCh.payload.doc.id;
-        this.productList.push(new Product(id,index, product["name"], product["description"],  product["cat"], product["price"], product["url"]))
-      }
-      
-      this.tempList = this.productList;
-    })
+    return this.productService.getProducts();
   }
 
 

@@ -11,8 +11,6 @@ export class CartService {
    // This is the list to store the items/products
 	itemsList: Item[] = [];
   // this member variable is use to keep total number of items
-	private totalItems:number = 0;
-
   // this member variable is used to keep the total price
 	private totalPrice:number = 0; 
 
@@ -27,38 +25,35 @@ export class CartService {
   addItemToList(product: Product): void{ 
     // now you add product by calling the push method on the itemList array
     
-      this.itemsList.push(new Item(this.totalItems,product));
-      this.totalItems++;
-    
-      this.setTotalPrice(product);
+      this.itemsList.push(new Item(product));
+
+      this.setTotalPrice(product.getPrice());
 
   }
 
   getTotalItems(){ return this.getItemList().length}
 
-  setTotalPrice(product: Product) {
+  setTotalPrice(price: number) {
    
-    this.totalPrice  = this.totalPrice + product.getPrice();
+    this.totalPrice  = this.totalPrice + price;
    }
 
   getTotalPrice(){ return this.totalPrice;}
 
-  deleteItem(id){
-      let index = 0;
-      
-      // this.totalPrice = this.totalPrice - this.itemsList[id].getTotalPrice();
-  		// this.itemsList.splice(index,1);
-  		for(let item of this.itemsList){
-  			if(item.getId() == id){
-  				this.totalPrice = this.totalPrice - item.getTotalPrice();
-          this.itemsList.splice(index,1);
-          if(this.itemsList.length == 0) {
-            this.totalItems = 0;
-          }
-  				break;
-  			}
+  deleteItem(id: string){
 
-  			index = index + 1;
+       let index = 0;
+      
+      
+  		for(let item of this.itemsList){
+
+  		  if(item.getProduct().getId() == id){
+
+          this.totalPrice = this.totalPrice - this.itemsList[index].getTotalPrice();
+          this.itemsList.splice(index,1);
+          break;
+        }
+        index++;
   		}
   		
   }
@@ -73,20 +68,44 @@ export class CartService {
       return false;
   }
 
-  increasingQnty(id){
+  increasingQnty(id: string){
 
-    this.itemsList[id].setQuantity();
-    this.itemsList[id].increaseTotalPrice();
+    let index = 0;
+    for(let item of this.itemsList){
+
+        if(item.getProduct().getId() == id){
+          this.itemsList[index].setQuantity();
+          this.itemsList[index].increaseTotalPrice();
+          this.totalPrice = this.totalPrice + this.itemsList[index].getProduct().getPrice();
+          break;
+        }
+
+        index++;
+      }
+
+    
    
-    this.totalPrice = this.totalPrice + this.itemsList[id].getProduct().getPrice();
   
   }
 
-    decreasingQnty(id){
-      this.itemsList[id].decreaseQuantity();
-      this.itemsList[id].decreaseTotalPrice();
+  decreasingQnty(id: string){
+
+      let index = 0;
+    for(let item of this.itemsList){
+
+        if(item.getProduct().getId() == id){
+
+          this.itemsList[index].decreaseQuantity();
+          this.itemsList[index].decreaseTotalPrice();
      
-      this.totalPrice = this.totalPrice - this.itemsList[id].getProduct().getPrice();
+          this.totalPrice = this.totalPrice - this.itemsList[index].getProduct().getPrice();
+          
+          break;
+        }
+
+        index++;
     }
+     
+  }
 
 }

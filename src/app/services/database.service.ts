@@ -101,10 +101,9 @@ export class DatabaseService {
       
       for(let item of this.cart.getItemList()){
         this.afs.collection("Item").add({
-          id: item.getId(),
           quantity: item.getQuantity(),
           totalprice: item.getTotalPrice(),
-          prodRef : item.getProduct().getRef(),
+          prodRef : item.getProduct().getId(),
           oRef: docRef.id,
         })
       }
