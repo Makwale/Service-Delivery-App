@@ -18,6 +18,7 @@ import { OrdersPage } from '../orders/orders.page';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  //This is the object that make the images to slide on the home page
   slideOpts = {
     init: true,
     autoplay: {
@@ -36,11 +37,22 @@ export class HomePage {
     spaceBetween : 10
   }
 
+  //This variable is the array that store a list of the products
   productList: Product[];
+
+  //This is the temporary variable that is used to store list of products temporaly in case the user wants to search a product 
   tempList;
+
+  //This is the variable that check if products are loaded into productsList variable
   isProductsLoaded = false;
+
+  //This is the variable that check if image of product is still downloading
   isImgLoading = true;
+
+
+   //This is the variable that check if image of product is downloaded
   isImgLoaded;
+  
 
   constructor(public productService: ProductService,
    private cartService: CartService,
@@ -50,35 +62,27 @@ export class HomePage {
     public accs: AccountService) {
   }
 
+  //This method runs first when the user initialze the app
   ngOnInit() {
-   this.productService.getProducts().subscribe(data => {
-     let tempVar: Product[] = []
-    
-      for(let documentCh of data){
+    //This line initializes the prodictList array variable
+     this.productList = [];
+     //this.filter = [];
 
-        let product = documentCh.payload.doc.data();
-      
-        let id = documentCh.payload.doc.id;
-        
-        tempVar.push(new Product(id,product["name"], product["description"],  product["cat"], product["price"], product["url"]))
-      }
-      this.isProductsLoaded = true;
-      this.productList = tempVar;
-      this.tempList = this.productList;
-      this.isProductsLoaded = true;
-    })
-
-    
+     //This line calls the getProducts() method which is responsible for loading the products
+    this.getProducts()
   }
 
+  //This method changes the state of isImgLoading variable
   isImageLoading(){
     this.isImgLoading = true;
   }
 
+  //And also this one does the same thing of changing the state of isImgLoading variable
   isImageLoaded(){
     this.isImgLoading = false;
   }
 
+  //This navigate the user to the Order page
   async navigateToOrders(){
     const modal = await this.modalController.create({
         component: OrdersPage,
@@ -86,13 +90,30 @@ export class HomePage {
       return await modal.present();
   }
 
+  //This is the method that load the products to the productList array variable
+	getProducts(){
+   
+    this.productService.getProducts().subscribe(data => {
+      let index = 0;
+      for(let documentCh of data){
+        let product = documentCh.payload.doc.data();
+        let id = documentCh.payload.doc.id;
+        
+        //This line add product to the productList 
+        this.productList.push(new Product(id,index, product["name"], product["description"],  product["cat"], product["price"], product["url"]))
+      }
 
-  // this is the mothod you have to pay attention on
-// i passed the product as argument
-// check on the component constructor, i created sersionService object
-// that object is the one will be used to add product to the cart
+      //This line changes the state of isProductsLoaded when the products are loaded to the productList array variable 
+      this.isProductsLoaded = true;
+
+      //This line assign the productsList values which are the products list to the tempList variable
+      this.tempList = this.productList;
+    })
+	}
+
+  //This method add the item to the cart
   async addToCart(product: Product){
-
+      //This line checks if the user has signedin so that the app can allow the user to start shopping
       if(this.accs.getLoginStatus()){
         if(!this.cartService.equal(product)){
           // we asume the product doesnt exist in the cart
@@ -119,16 +140,23 @@ export class HomePage {
       }
     }
    
-
+// This is the method used to search the products based on category
+// The categories are f for fast food, b for burgers, p for pizzas, and t for traditional but traditional food are not included
     async filter(cat){
+      //This line i declared products array variable to store the products of specific category
       var products = [];
+
+      //This line check if category is not fast food
+      //If is not fast food we get inside if statement
       if(cat != 'f'){
+        //This line assign all products of specific category that the user has selected
         products = 
         this.tempList.filter( c => c.getCategory() == cat);
       }else{
         products = this.tempList;
       }
       
+      //This line navigate the user to the CategorysearchPage to display all products of specific category
       const modal = await this.modalController.create({
         component: CategorysearchPage,
         componentProps: {
@@ -138,13 +166,16 @@ export class HomePage {
       return await modal.present();
     }
 
+    //This method opens the login page
     async login(){
+      this.productList = [];
       const modal = await this.modalController.create({
         component: AccountPage,
       });
       return await modal.present();
     }
 
+     //This method is used to open the SearchPage in case you want to search the product by name
     async searchProduct(){
       const modal = await this.modalController2.create({
         component: SearchPage,
